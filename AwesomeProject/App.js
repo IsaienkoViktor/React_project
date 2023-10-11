@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, View } from "react-native";
 import bg from "./assets/images/bg.jpg";
 import { RegisterScreen } from "./screens/RegisterScreen.jsx";
 
