@@ -1,5 +1,5 @@
 import { View } from "react-native";
 
 export const PostsScreen = () => {
-  return <View>PostsScreen</View>;
+  return <View></View>;
 };

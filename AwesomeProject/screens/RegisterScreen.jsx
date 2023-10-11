@@ -1,83 +1,74 @@
+import { useState } from "react";
 import {
-  Image,
+  View,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
-// import icon from "../assets/images/icon.png";
-import icon from "../assets/images/icon.png";
+import { PlusIcon } from "../components/icons/PlusIcon";
+import { AuthTitle } from "../components/AuthTitle";
+import { Input } from "../components/Input";
+import { ConfirmBtn } from "../components/ConfirmBtn";
+import { Redirect } from "../components/Redirect";
+import { Color, Border, FontFamily, FontSize } from "../styles/globalStyles";
+import { Password } from "../components/Password";
 
 export const RegisterScreen = () => {
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
   return (
     <View style={styles.container}>
-      <Image style={styles.addphoto} source={icon}></Image>
-      <Text style={styles.mainText}>Реєстрація</Text>
-      <View style={styles.container}>
-        <TextInput style={styles.textInput} placeholder="Логін" />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Адреса електронної пошти"
-        />
-        <TextInput style={styles.textInput} placeholder="Пароль" />
+      <View style={styles.imageContainer}>
+        <PlusIcon styles={styles.icon} />
       </View>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Зареєструватися</Text>
-      </TouchableOpacity>
-      <Text />
+      <AuthTitle title="Реєстрація" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
+        <View style={styles.inputContainer}>
+          <Input placeholder="Логін" />
+          <Input placeholder="Адреса електронної пошти" />
+          <Password />
+        </View>
+      </KeyboardAvoidingView>
+      <ConfirmBtn title="Зареєстуватися" />
+      <Redirect firstPart="Вже є акаунт?" secondPart="Увійти" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    gap: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    // marginTop: 235,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    position: "relative",
+    height: "70%",
+    paddingHorizontal: 16,
+    paddingTop: 92,
+    paddingBottom: 74,
+    backgroundColor: Color.white,
+    borderTopRightRadius: Border.m,
+    borderTopLeftRadius: Border.m,
   },
-  addphoto: { flexShrink: 0, height: 120, width: 132 },
-  mainText: {
-    flexShrink: 0,
-    height: 35,
-    textAlign: "center",
-    color: "rgba(33, 33, 33, 1)",
-    fontFamily: "Roboto",
-    fontSize: 30,
-    fontWeight: "500",
-    letterSpacing: 0.3,
+  imageContainer: {
+    position: "absolute",
+    top: -60,
+    left: "50%",
+    transform: [{ translateX: -50 }],
+    width: 120,
+    height: 120,
+    borderRadius: Border.s,
+    backgroundColor: Color.lightGray,
   },
-
-  textInput: {
-    flexShrink: 1,
-    height: 50,
-    width: 343,
-    alignItems: "flex-start",
-    rowGap: 0,
-    backgroundColor: "rgba(246, 246, 246, 1)",
-    borderRadius: 4,
+  icon: {
+    position: "absolute",
+    bottom: 14,
+    right: -13,
+    backgroundColor: Color.white,
+    borderRadius: 50,
   },
-  button: {
-    width: 343,
-    backgroundColor: "rgba(255, 108, 0, 1)",
-    alignItems: "center",
-    rowGap: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 100,
-  },
-  buttonText: {
-    flexShrink: 0,
-    textAlign: "center",
-    color: "rgba(255, 255, 255, 1)",
-    fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeight: "400",
-    letterSpacing: 0,
+  inputContainer: {
+    rowGap: 16,
+    marginBottom: 43,
   },
 });
