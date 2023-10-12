@@ -1,10 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  KeyboardAvoidingView,
-} from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
 import BgImg from "./assets/images/background.jpg";
 import { RegisterScreen } from "./Screens/RegisterScreen";
