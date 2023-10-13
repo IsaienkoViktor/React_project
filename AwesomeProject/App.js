@@ -1,6 +1,8 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
 import BgImg from "./assets/images/background.jpg";
 import { RegisterScreen } from "./Screens/RegisterScreen";
 import { LoginScreen } from "./Screens/LoginScreen";
@@ -17,13 +19,15 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={BgImg} style={styles.bgImage}>
-        <RegisterScreen />
-        {/* <LoginScreen /> */}
-      </ImageBackground>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        <ImageBackground source={BgImg} style={styles.bgImage}>
+          {/* <RegisterScreen /> */}
+          <LoginScreen />
+        </ImageBackground>
+        <StatusBar style="auto" />
+      </View>
+    </NavigationContainer>
   );
 }
 
