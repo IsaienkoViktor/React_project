@@ -6,23 +6,25 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { PlusIcon } from "../components/icons/PlusIcon";
-import { AuthTitle } from "../components/AuthTitle";
-import { Input } from "../components/Input";
-import { ConfirmBtn } from "../components/ConfirmBtn";
-import { Redirect } from "../components/Redirect";
-import { Password } from "../components/Password";
-import useKeyboardVisibility from "../hooks/useKeyboardVisibility";
-import { Background } from "../components/Background";
-import { handleCloseKeyboard } from "../utils/handleCloseKeyboard";
+import { PlusIcon } from "../../components/icons/PlusIcon";
+import { AuthTitle } from "../../components/AuthTitle";
+import { Input } from "../../components/Input";
+import { ConfirmBtn } from "../../components/ConfirmBtn";
+import { Redirect } from "../../components/Redirect";
+import { Password } from "../../components/Password";
+import useKeyboardVisibility from "../../hooks/useKeyboardVisibility";
+import { Background } from "../../components/Background";
+import { handleCloseKeyboard } from "../../utils/handleCloseKeyboard";
 
-import { Color, Border } from "../styles/globalStyles";
+import { Color, Border } from "../../styles/globalStyles";
 
 export const RegisterScreen = () => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const [isKeyboardVisible, setIsKeyboardVisible] = useKeyboardVisibility();
 
@@ -32,6 +34,7 @@ export const RegisterScreen = () => {
     setLogin("");
     setEmail("");
     setPassword("");
+    navigation.navigate("Home");
   };
 
   return (
@@ -65,7 +68,11 @@ export const RegisterScreen = () => {
             </View>
           </KeyboardAvoidingView>
           <ConfirmBtn title="Зареєстуватися" onPress={handleSubmit} />
-          <Redirect firstPart="Вже є акаунт?" secondPart="Увійти" />
+          <Redirect
+            firstPart="Вже є акаунт?"
+            secondPart="Увійти"
+            navigateTo="Login"
+          />
         </View>
       </TouchableWithoutFeedback>
     </Background>

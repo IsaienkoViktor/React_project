@@ -1,11 +1,8 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
-import { ImageBackground, StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
-import BgImg from "./assets/images/background.jpg";
-import { RegisterScreen } from "./Screens/RegisterScreen";
-import { LoginScreen } from "./Screens/LoginScreen";
+
+import { defineRoute } from "./utils/router";
 
 export default function App() {
   const [fontsLoaded, error] = useFonts({
@@ -14,30 +11,11 @@ export default function App() {
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
 
+  const routing = defineRoute(null);
+
   if (!fontsLoaded && !error) {
     return null;
   }
 
-  return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <ImageBackground source={BgImg} style={styles.bgImage}>
-          {/* <RegisterScreen /> */}
-          <LoginScreen />
-        </ImageBackground>
-        <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  bgImage: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
-  },
-});

@@ -6,21 +6,23 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { Input } from "../components/Input";
-import { ConfirmBtn } from "../components/ConfirmBtn";
-import { Redirect } from "../components/Redirect";
-import { AuthTitle } from "../components/AuthTitle";
-import { Password } from "../components/Password";
-import { Background } from "../components/Background";
-import useKeyboardVisibility from "../hooks/useKeyboardVisibility";
-import { handleCloseKeyboard } from "../utils/handleCloseKeyboard";
+import { Input } from "../../components/Input";
+import { ConfirmBtn } from "../../components/ConfirmBtn";
+import { Redirect } from "../../components/Redirect";
+import { AuthTitle } from "../../components/AuthTitle";
+import { Password } from "../../components/Password";
+import { Background } from "../../components/Background";
+import useKeyboardVisibility from "../../hooks/useKeyboardVisibility";
+import { handleCloseKeyboard } from "../../utils/handleCloseKeyboard";
 
-import { Border, Color } from "../styles/globalStyles";
+import { Border, Color } from "../../styles/globalStyles";
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const [isKeyboardVisible, setIsKeyboardVisible] = useKeyboardVisibility();
 
@@ -29,6 +31,7 @@ export const LoginScreen = () => {
     console.log(data);
     setEmail("");
     setPassword("");
+    navigation.navigate("Home");
   };
 
   return (
@@ -54,7 +57,11 @@ export const LoginScreen = () => {
             </View>
           </KeyboardAvoidingView>
           <ConfirmBtn title="Увійти" onPress={handleSubmit} />
-          <Redirect firstPart="Немає акаунту?" secondPart="Зареєструватися" />
+          <Redirect
+            firstPart="Немає акаунту?"
+            secondPart="Зареєструватися"
+            navigateTo="Register"
+          />
         </View>
       </TouchableWithoutFeedback>
     </Background>
