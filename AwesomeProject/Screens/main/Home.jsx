@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -17,6 +17,7 @@ export const Home = () => {
 
   return (
     <MainTabs.Navigator
+      id="home"
       initialRouteName="Posts"
       screenOptions={{
         tabBarShowLabel: false,
@@ -38,18 +39,12 @@ export const Home = () => {
         name="Posts"
         component={PostsScreen}
         options={{
-          title: "Публікації",
+          tabBarStyle: {
+            display: "flex",
+          },
+          headerShown: false,
           tabBarIcon: () => (
             <AntDesign name="appstore-o" size={24} color={Color.fogGray} />
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              style={{ marginRight: 16 }}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <Feather name="log-out" size={24} color={Color.fogGray} />
-            </TouchableOpacity>
           ),
         }}
       />
@@ -57,6 +52,7 @@ export const Home = () => {
         name="Create"
         component={CreatePostsScreen}
         options={{
+          tabBarStyle: { display: "none" },
           title: "Створити публікацію",
           tabBarIcon: () => (
             <Fontisto name="plus-a" size={18} color={Color.white} />
@@ -68,6 +64,17 @@ export const Home = () => {
             borderRadius: 20,
             backgroundColor: Color.orange,
           },
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ marginLeft: 16 }}
+              activeOpacity={0.5}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Feather name="arrow-left" size={24} color={Color.fogGray} />
+            </TouchableOpacity>
+          ),
         }}
       />
       <MainTabs.Screen
